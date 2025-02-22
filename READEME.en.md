@@ -30,7 +30,6 @@
   - Scrambles cube with random moves
   - Calls A* solver
   - Displays solution path
-  - 
 ---
 
 ## Heuristic & Scoring
@@ -47,11 +46,85 @@ Modify scramble intensity in Main.py:
 ```python
 scrambled_cube, scramble_moves = scramble_cube(original_cube, num_moves=10)  # Default: 10 moves
 ```
-
+---
 ## Execution
 ```bash
 python Main.py
 ```
+## OUTPUT
+```bash
+=== Αρχική Κατάσταση Κύβου ===
+      W W W            
+      W W W            
+      W W W            
+O O O G G G R R R B B B
+O O O G G G R R R B B B
+O O O G G G R R R B B B
+      Y Y Y            
+      Y Y Y            
+      Y Y Y            
+
+
+=== Μπερδεμένος Κύβος ===
+Κινήσεις για το μπέρδεμα: R -> R' -> B -> F' -> D
+      R R R            
+      W W W            
+      R R R            
+W O W G G G Y R Y B B B
+W O W G G G Y R Y B B B
+B B B W O W G G G Y R Y
+      O Y O            
+      O Y O            
+      O Y O            
+
+
+=== Αρχή Επίλυσης με A* ===
+
+Βρέθηκε λύση σε 3 βήματα:
+D' -> F -> B'
+      R R R            
+      W W W            
+      R R R            
+W O W G G G Y R Y B B B
+W O W G G G Y R Y B B B
+B B B W O W G G G Y R Y
+      O Y O            
+      O Y O            
+      O Y O            
+
+      R R R            
+      W W W            
+      R R R            
+W O W G G G Y R Y B B B
+W O W G G G Y R Y B B B
+W O W G G G Y R Y B B B
+      O O O            
+      Y Y Y            
+      O O O            
+
+      R R R            
+      W W W            
+      W W W            
+W O O G G G R R Y B B B
+W O O G G G R R Y B B B
+W O O G G G R R Y B B B
+      Y Y Y            
+      Y Y Y            
+      O O O            
+
+
+=== Επιλυμένος Κύβος ===
+      W W W            
+      W W W            
+      W W W            
+O O O G G G R R R B B B
+O O O G G G R R R B B B
+O O O G G G R R R B B B
+      Y Y Y            
+      Y Y Y            
+      Y Y Y            
+```
+
 ## Dependencies
 Install required library:
 ```bash
