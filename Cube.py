@@ -137,17 +137,4 @@ class RubiksCube:
         elif move == "F'": self.rotate_F_prime()
         elif move == 'B': self.rotate_B()
         elif move == "B'": self.rotate_B_prime()
-
-
-
-    def calculate_fitness(self):
-        """Υπολογίζει πόσα κομμάτια είναι στη σωστή θέση (fitness)."""
-        fitness = 0
-        for face in self.faces.values():
-            # Για κάθε πρόσωπο του κύβου, υπολογίζουμε πόσα κομμάτια είναι σωστά
-            # Αν το χρώμα του κομματιού είναι σωστό, αυξάνουμε την fitness βαθμολογία
-            for row in face:
-                for color in row:
-                    if color == face[1, 1]:  # Αν το χρώμα είναι το ίδιο με το κεντρικό χρώμα της πλευράς
-                        fitness += 1
-        return fitness
+            
