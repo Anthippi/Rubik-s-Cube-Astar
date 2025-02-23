@@ -1,4 +1,4 @@
-# Επίλυση κύβου Rubik χρησιμοποιώντας τον αλγόριθμο **A\***.  [![Static Badge](https://img.shields.io/badge/English-orange)](READEME.en.md)
+# Επίλυση κύβου Rubik χρησιμοποιώντας τον αλγόριθμο **A\***.  [![Static Badge](https://img.shields.io/badge/English-orange)](README.en.md)
 
 ---
 
