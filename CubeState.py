@@ -10,7 +10,18 @@ class CubeState:
         self.f = self.g + self.h
 
     def heuristic(self):
-        return sum(np.sum(face != face[1,1]) for face in self.cube.faces.values())
+        distance = 0
+        for face_name, face in self.cube.faces.items():
+            target_color = face[1, 1]
+            for i in range(3):
+                for j in range(3):
+                    if face[i, j] != target_color:
+                        distance += 1
+        # Προσθήκη επιπλέον ποινών για edge/corner pieces εκτός θέσης
+        return distance // 8  # Κανονικοποίηση (εξαρτάται από το cube) 3x3x3
+
+    #def heuristic(self):
+    #    return sum(np.sum(face != face[1,1]) for face in self.cube.faces.values())
 
     def is_final(self):
         return all(np.all(face == face[1,1]) for face in self.cube.faces.values())
@@ -19,16 +30,16 @@ class CubeState:
         moves = ['U', "U'", 'D', "D'", 'L', "L'", 'R', "R'", 'F', "F'", 'B', "B'"]
         children = []
         for move in moves:
-            new_cube = copy.deepcopy(self.cube)
+            new_cube = self.cube.fast_copy()
             new_cube.apply_move(move)
             children.append(CubeState(new_cube, self, self.g + 1))
         return children
 
     def __hash__(self):
-        return hash(tuple(f.tobytes() for f in self.cube.faces.values()))
+        return hash(tuple(self.cube.faces[f].tobytes() for f in ['U', 'D', 'F', 'B', 'L', 'R']))
 
     def __eq__(self, other):
-        return all(np.array_equal(self.cube.faces[f], other.cube.faces[f]) for f in self.cube.faces)
+        return all(np.array_equal(self.cube.faces[f], other.cube.faces[f]) for f in ['U', 'D', 'F', 'B', 'L', 'R'])
 
     def __lt__(self, other):
         return self.f < other.f
