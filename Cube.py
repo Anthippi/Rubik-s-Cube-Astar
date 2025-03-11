@@ -137,4 +137,9 @@ class RubiksCube:
         elif move == "F'": self.rotate_F_prime()
         elif move == 'B': self.rotate_B()
         elif move == "B'": self.rotate_B_prime()
-            
+
+    def fast_copy(self):
+        new_cube = RubiksCube()
+        for face in self.faces:
+            new_cube.faces[face] = self.faces[face].copy()
+        return new_cube
