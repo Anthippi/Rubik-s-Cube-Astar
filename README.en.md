@@ -34,9 +34,15 @@
 
 ## Heuristic & Scoring
 - **Heuristic (h)**: 
-  Counts mismatched colors per face relative to center
+The heuristic function estimates the number of misplaced tiles on the Rubik's Cube to guide the search algorithm. It iterates through each face of the cube and compares the color of each tile to the center tile of that face, which represents the target color. The total number of mismatches is then divided by 8, normalizing the value based on the eight non-central tiles per face. This heuristic provides an approximation of how far the cube is from a solved state, helping prioritize moves that bring it closer to completion.
 ```python
-  return sum(np.sum(face != face[1,1]) for face in self.cube.faces.values()
+      def heuristic(self):
+        distance = 0
+        for face in self.cube.faces.values():
+            target_color = face[1, 1]  # Χρώμα του κέντρου της έδρας
+            mismatches = np.sum(face != target_color)
+            distance += mismatches
+        return distance
 ```
 - `g`: Path cost from initial state (number of moves)
 - `f = g + h`: Total score for state prioritization
