@@ -39,7 +39,7 @@
 Αλλάξτε το `num_moves=5` στο `Main.py`:
 
 ```python
-scrambled_cube, scramble_moves = scramble_cube(original_cube, num_moves=10) # Παράδειγμα: 10 κινήσεις
+scrambled_cube, scramble_moves = scramble_cube(original_cube, num_moves=5) # Παράδειγμα: 5 κινήσεις
 ```
 ---
 ## Εκτέλεση
