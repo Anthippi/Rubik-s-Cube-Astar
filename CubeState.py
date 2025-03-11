@@ -10,14 +10,36 @@ class CubeState:
         self.f = self.g + self.h  # Συνολικό κόστος f(n) = g(n) + h(n)
 
     def heuristic(self):
-        distance = 0
-        for face_name, face in self.cube.faces.items():
+        # Υπολογισμός λανθασμένων πλακιδίων με NumPy
+        total_mismatches = 0
+
+        for face in self.cube.faces.values():
             target_color = face[1, 1]
-            for i in range(3):
-                for j in range(3):
-                    if face[i, j] != target_color:
-                        distance += 1
-        return distance // 8  # Κανονικοποίηση (εξαρτάται από το cube) 3x3
+            # Υπολογισμός μη ταιριάζοντων κελιών χωρίς βρόγχους
+            mismatches = np.sum(face != target_color)
+            total_mismatches += mismatches
+
+        # Αφαίρεση των κεντρικών πλακιδίων (τα κέντρα είναι πάντα σωστά)
+        total_mismatches -= 6  # 6 έδρες * 1 κεντρικό πλακίδιο
+
+        # Προαιρετικά: Προσθήκη ποινών για γωνίες και άκρες
+        edge_penalty = 1.2  # Ποινή για λάθος άκρες
+        corner_penalty = 1.5  # Ποινή για λάθος γωνίες
+
+        for face_name, face in self.cube.faces.items():
+            mask = np.zeros((3, 3), dtype=int)
+            # Δημιουργία μάσκας για γωνίες (1 στις γωνίες)
+            mask[[0, 0, 2, 2], [0, 2, 0, 2]] = 1
+            corners = face[mask.astype(bool)]
+            total_mismatches += corner_penalty * np.sum(corners != face[1, 1])
+
+            # Δημιουργία μάσκας για άκρες (1 στις άκρες)
+            mask = np.zeros((3, 3), dtype=int)
+            mask[[0, 1, 1, 2], [1, 0, 2, 1]] = 1
+            edges = face[mask.astype(bool)]
+            total_mismatches += edge_penalty * np.sum(edges != face[1, 1])
+
+        return total_mismatches // 8  # Κανονικοποίηση
 
     def is_final(self):
         # Ελέγχει αν όλες οι έδρες του κύβου έχουν ομοιόμορφο χρώμα (αν έχει λυθεί)
