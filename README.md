@@ -42,6 +42,13 @@
 scrambled_cube, scramble_moves = scramble_cube(original_cube, num_moves=10) # Παράδειγμα: 10 κινήσεις
 ```
 ---
+## Εκτέλεση
+
+Για να εκτελέσετε τον κώδικα, χρησιμοποιήστε την ακόλουθη εντολή:
+
+```bash
+python Main.py 
+```
 
 ## Παράδειγμα Εκτέλεσης
 
