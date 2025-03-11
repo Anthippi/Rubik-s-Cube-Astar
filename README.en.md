@@ -18,10 +18,7 @@
 
 ### `CubeState.py`
 - Represents a cube state with:
-  - Heuristic calculation: 
-    ```python
-    sum(np.sum(face != face[1,1]) for face in self.cube.faces.values()
-    ```
+  - Heuristic calculation
   - Child state generation (all possible moves)
   - State comparison methods (`__hash__` and `__eq__`)
 
@@ -34,16 +31,11 @@
 
 ## Heuristic & Scoring
 - **Heuristic (h)**: 
-The heuristic function estimates the number of misplaced tiles on the Rubik's Cube to guide the search algorithm. It iterates through each face of the cube and compares the color of each tile to the center tile of that face, which represents the target color. The total number of mismatches is then divided by 8, normalizing the value based on the eight non-central tiles per face. This heuristic provides an approximation of how far the cube is from a solved state, helping prioritize moves that bring it closer to completion.
-```python
-      def heuristic(self):
-        distance = 0
-        for face in self.cube.faces.values():
-            target_color = face[1, 1]  # Χρώμα του κέντρου της έδρας
-            mismatches = np.sum(face != target_color)
-            distance += mismatches
-        return distance
-```
+The heuristic function estimates the approximation cost from the current cube state to the solved state. It combines:
+  - Mismatched Tiles: Counts tiles that do not match the center color of each face (excluding fixed centers).
+  - Edge/Corner Penalties: Applies higher penalties for incorrect corners (+1.5 per tile) and edges (+1.2 per tile), as they require more moves to fix.
+
+The total cost is normalized by dividing by 8 to align better with the actual move count.
 - `g`: Path cost from initial state (number of moves)
 - `f = g + h`: Total score for state prioritization
 
