@@ -141,5 +141,5 @@ class RubiksCube:
     def fast_copy(self):
         new_cube = RubiksCube()
         for face in self.faces:
-            new_cube.faces[face] = self.faces[face].copy()
+            new_cube.faces[face] = np.copy(self.faces[face])
         return new_cube
