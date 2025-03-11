@@ -44,7 +44,7 @@
 ## Key Parameters
 Modify scramble intensity in Main.py:
 ```python
-scrambled_cube, scramble_moves = scramble_cube(original_cube, num_moves=10)  # Default: 10 moves
+scrambled_cube, scramble_moves = scramble_cube(original_cube, num_moves=5)  # Default: 5 moves
 ```
 ---
 ## Execution
