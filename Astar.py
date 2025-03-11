@@ -1,6 +1,5 @@
 import heapq
 
-
 class AStarSolver:
     def __init__(self, initial_state):
         self.open = []
