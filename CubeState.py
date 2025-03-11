@@ -17,7 +17,6 @@ class CubeState:
                 for j in range(3):
                     if face[i, j] != target_color:
                         distance += 1
-        # Προσθήκη επιπλέον ποινών για edge/corner pieces εκτός θέσης
         return distance // 8  # Κανονικοποίηση (εξαρτάται από το cube) 3x3
 
     def is_final(self):
