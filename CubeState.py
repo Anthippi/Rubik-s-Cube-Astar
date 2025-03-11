@@ -10,13 +10,15 @@ class CubeState:
         self.f = self.g + self.h  # Συνολικό κόστος f(n) = g(n) + h(n)
 
     def heuristic(self):
-        # Υπολογίζει τον αριθμό των λανθασμένων πλακιδίων σε σχέση με το κεντρικό χρώμα κάθε έδρας
         distance = 0
-        for face in self.cube.faces.values():
-            target_color = face[1, 1]  # Το κεντρικό χρώμα της έδρας (στόχος)
-            mismatches = np.sum(face != target_color)  # Μετράει πόσα πλακίδια δεν ταιριάζουν
-            distance += mismatches
-        return distance // 8  # Κανονικοποίηση με βάση τα 8 μη κεντρικά πλακίδια κάθε έδρας
+        for face_name, face in self.cube.faces.items():
+            target_color = face[1, 1]
+            for i in range(3):
+                for j in range(3):
+                    if face[i, j] != target_color:
+                        distance += 1
+        # Προσθήκη επιπλέον ποινών για edge/corner pieces εκτός θέσης
+        return distance // 8  # Κανονικοποίηση (εξαρτάται από το cube) 3x3
 
     def is_final(self):
         # Ελέγχει αν όλες οι έδρες του κύβου έχουν ομοιόμορφο χρώμα (αν έχει λυθεί)
