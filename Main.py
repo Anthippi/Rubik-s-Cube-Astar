@@ -23,7 +23,7 @@ def main():
     original_cube.display()
 
     # 2. Μπέρδεμα του κύβου
-    scrambled_cube, scramble_moves = scramble_cube(original_cube, num_moves=5)
+    scrambled_cube, scramble_moves = scramble_cube(original_cube, num_moves=10)
     print("\n=== Μπερδεμένος Κύβος ===")
     print(f"Κινήσεις για το μπέρδεμα: {' -> '.join(scramble_moves)}")  # Εμφάνιση κινήσεων
     scrambled_cube.display()
