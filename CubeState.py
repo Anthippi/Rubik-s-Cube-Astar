@@ -73,3 +73,11 @@ class CubeState:
     def __lt__(self, other):
         # Ορίζει τη σχέση μικρότερου για τη χρήση της κατάστασης σε ουρές προτεραιότητας (π.χ. στο A*)
         return self.f < other.f
+
+    def get_path(self):
+        path = []
+        current = self
+        while current.parent:
+            path.append(current.move)
+            current = current.parent
+        return path[::-1]  # Αντιστροφή για σωστή σειρά
